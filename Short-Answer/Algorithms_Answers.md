@@ -30,5 +30,8 @@ dropped. Thus broken = 1 * n.
 
 The value of f can be computed thusly: f = (n * dropped) + (n * broken) / n
 
+The complexity should be O(n)
+
 def value_f(n, dropped=1, broken=1):
-    
+    f = ((n * dropped) + (n * broken)) / n
+    return f
