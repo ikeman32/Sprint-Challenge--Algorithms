@@ -95,9 +95,46 @@ class SortingRobot:
     def sort(self):
         """
         Sort the robot's list.
+
+        assume robot has item in hand
+        robot must compare the item
+        if not is_light_on():
+            if compare_item() == 1: 
+                swap_item()
+                move_right()
+                if not move_right():
+                    set_light_on()
+            else:
+                move_right()
+        if set_light_on():
+            if compare_item() == 1:
+                swap_item()
+                move_left()
+                if not move_left():
+                    set_light_off()
+            else:
+                move_left()
+
         """
-        # Fill this out
-        pass
+        if not self.light_is_on():
+            self.set_light_on()
+            while self.move_right():
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    self.move_right()
+                    self.swap_item()
+                    self.set_light_off()
+                else:
+                    self.move_right()
+                    self.swap_item()
+            while self.move_left:
+                self.move_left()
+        
+
+        
+        
 
 
 if __name__ == "__main__":
