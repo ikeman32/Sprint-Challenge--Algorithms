@@ -95,9 +95,61 @@ class SortingRobot:
     def sort(self):
         """
         Sort the robot's list.
+
+        assume robot has item in hand
+        robot must compare the item
+        if not is_light_on():
+            if compare_item() == 1: 
+                swap_item()
+                move_right()
+                if not move_right():
+                    set_light_on()
+            else:
+                move_right()
+        if set_light_on():
+            if compare_item() == 1:
+                swap_item()
+                move_left()
+                if not move_left():
+                    set_light_off()
+            else:
+                move_left()
+
         """
-        # Fill this out
-        pass
+        if self.light_is_on():#base case
+            return
+        self.set_light_on()
+        self.swap_item()
+
+        while (self.can_move_right()):
+            self.move_right()
+            '''
+            This seems counter intuitive, if can move right and item is less that the one in front
+            swap the item. But if you can't move right and item is larger than the one in front
+            also swap item.
+            '''
+            if (self.can_move_right and self.compare_item() == -1) or (not self.can_move_right() and self.compare_item() == 1):
+                self.swap_item()
+            elif self.compare_item() == 1:
+                self.swap_item()
+                self.set_light_off()
+        #it is the same as above but in reverse order.
+        while (self.can_move_left()):
+            self.move_left()
+            if (self.can_move_left() and self.compare_item() == 1) or (not self.can_move_left() and self.compare_item() == -1):
+                self.swap_item()
+            elif self.compare_item() == None:
+                self.swap_item()
+            elif self.compare_item() == -1:
+                self.set_light_off()            
+                
+        return self.sort()
+            
+
+    
+                
+        
+        
 
 
 if __name__ == "__main__":
